@@ -1,0 +1,12 @@
+.active{
+    color: rgb(255, 255, 255);
+}
+
+input.search-field{
+    width: 110%;
+}
+
+.nav-text{
+    margin-left: 12px;
+}
+
