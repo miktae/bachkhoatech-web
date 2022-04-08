@@ -31,12 +31,11 @@ function Home() {
   const [iotData, setIotData] = useState([{
     'temp': 'Loading...',
     'hum': 'Loading...',
-    'pH': 'Loading...',
     'id': 'Loading...'
   }]);
 
   const usersCollectionRef = collection(db, "iot_datas");
-  const Title = ['Name', 'Temperature', 'Humidity', 'pH'];
+  const Title = ['Tên trạm', 'Nhiệt độ(°C)', 'Độ ẩm(%)'];
 
   useEffect(() => onSnapshot(usersCollectionRef, (snapshot) => {
     setIotData(snapshot.docs.map(doc => ({
@@ -61,7 +60,6 @@ function Home() {
               <td className="text-center">{data.id}</td>
               <td className="text-center">{data.temp}</td>
               <td className="text-center">{data.hum}</td>
-              <td className="text-center">{data.pH}</td>
             </tr>
           ))}
         </tbody>
@@ -71,6 +69,18 @@ function Home() {
           options={
             {
               responsive: true,
+              interaction: {
+                mode: "index",
+                intersect: false,
+              },
+              tooltips: {
+                mode: 'index',
+                intersect: false,
+              },
+              hover: {
+                mode: 'nearest',
+                intersect: true
+              },
               plugins: {
                 legend: {
                   display: true,
@@ -80,17 +90,9 @@ function Home() {
                     usePointStyle: true,
                   },
                 },
-                tooltips: {
-                  mode: 'index',
-                  intersect: false,
-                },
-               hover: {
-                  mode: 'nearest',
-                  intersect: true
-                },
                 title: {
                   display: true,
-                  text: 'Temperature Chart',
+                  text: 'Biểu đồ nhiệt độ',
                 },
               },
             }
@@ -100,7 +102,7 @@ function Home() {
             {
               labels: iotData.map((data) => data.id),
               datasets: [{
-                label: 'Temperature',
+                label: 'Nhiệt độ',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: iotData.map((data) => data.temp),
@@ -108,64 +110,45 @@ function Home() {
             }
           } />
         <Line
-        options={
-          {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: true,
-                position: 'top',
-                align: "start",
-                labels: {
-                  usePointStyle: true,
+          options={
+            {
+              responsive: true,
+              interaction: {
+                mode: "index",
+                intersect: false,
+              },
+              tooltips: {
+                mode: 'index',
+                intersect: false,
+              },
+              hover: {
+                mode: 'nearest',
+                intersect: true
+              },
+              plugins: {
+                legend: {
+                  display: true,
+                  position: 'top',
+                  align: "start",
+                  labels: {
+                    usePointStyle: true,
+                  },
+                },
+                title: {
+                  display: true,
+                  text: 'Biểu đồ độ ẩm',
                 },
               },
-              title: {
-                display: true,
-                text: 'Humidity Chart',
-              },
-            },
+            }
           }
-        }
           data={
             {
               labels: iotData.map((data) => data.id),
               datasets: [{
-                label: 'Humidity',
+                label: 'Độ ẩm',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: iotData.map((data) => data.hum),
-              }]
-            }
-          } />
-          <Line
-        options={
-          {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: true,
-                position: 'top',
-                align: "start",
-                labels: {
-                  usePointStyle: true,
-                },
-              },
-              title: {
-                display: true,
-                text: 'pH Chart',
-              },
-            },
-          }
-        }
-          data={
-            {
-              labels: iotData.map((data) => data.id),
-              datasets: [{
-                label: 'pH',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: iotData.map((data) => data.pH),
               }]
             }
           } />

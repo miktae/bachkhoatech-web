@@ -1,152 +1,97 @@
 import React from 'react'
 import './Contact.css'
 
-class Contact extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      nameError: false,
-      contact: '',
-      email: '',
-      emailError: false,
-      emailError2: false,
-      message: '',
-      messageError: false,
-      formValid: false
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-  }
-
-  isValidEmail(email) {
-    return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email);
-  }
-
-  // isValidcontact(contactno) {
-  //   return /^[6-9]\d{9}$/.test(contactno);
-  // }  
-
-  handleBlur(e) {
-
-    const name = e.target.name;
-    const value = e.target.value;
-
-    this.setState({ [name]: value });
-
-    if (value.length <= 0 && (name == 'name')) {
-      this.setState({ nameError: true });
-    } else {
-      this.setState({ nameError: false });
-    }
-
-    if (value.length <= 0 && (name == 'email')) {
-      this.setState({ emailError: true });
-      this.setState({ emailError2: false });
-    } else {
-      this.setState({ emailError: false });
-      if (this.isValidEmail(value)) {
-        this.setState({ emailError2: false });
-      } else {
-        this.setState({ emailError2: true });
-      }
-    }
-
-  }
-
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  handleSubmit(e) {
-    const { name, email, message, nameError, emailError, emailError2, messageError } = this.state;
-
-    this.setState({ nameError: name ? false : true });
-    this.setState({ messageError: message ? false : true });
-    this.setState({ emailError: email ? false : true });
-    if (email && !emailError) { this.setState({ emailError2: this.isValidEmail(email) ? false : true }); }
-
-
-    if (name && email && message && !nameError && !emailError && !emailError2 && !messageError) {
-      this.setState({ formValid: true });
-    } else {
-      this.setState({ formValid: false });
-    }
-
-    e.preventDefault();
-  }
-
-  render() {
-
-    const { name, email, message, nameError, emailError, emailError2, messageError, formValid } = this.state;
-
-    if (!formValid) {
-
-      return (
-        <>
-          <div className="card shadow-sm border-0 px-3 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
-            <div className="card-header bg-transparent border-0 text-center text-uppercase"><h3>{this.props.title}</h3></div>
-            <div className="card-body">
-              <form action="/" onSubmit={(e) => this.handleSubmit(e)} encType="multipart/form-data" autoComplete="off">
-                <div className="form-group">
-                  <label className="mb-0">Tên <span className="text-danger">*</span></label>
-                  <input name="name" type="text" className="form-control"
-                   placeholder="Tên..." value={this.state.name}
-                    onChange={this.handleChange} onBlur={this.handleBlur} />
-                  {nameError
-                    ? <div className="alert alert-danger mt-2">Vui lòng điền tên.</div>
-                    : ''
-                  }
+export default function Contact() {
+  return (
+    <>
+      <section class="ftco-section">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12">
+              <div class="wrapper">
+                <div class="row no-gutters">
+                  <div class="col-md-7 d-flex align-items-stretch">
+                    <div class="contact-wrap w-100 p-md-5 p-4">
+                      <h3 class="mb-4">Liên hệ chúng tôi</h3>
+                      <div id="form-message-warning" class="mb-4"></div>
+                      <div id="form-message-success" class="mb-4">
+                        Cảm ơn bạn đã liên hệ với chúng tôi. 
+                        Chúng tôi sẽ phản hồi sớm nhất.
+                      </div>
+                      <form method="POST" id="contactForm" name="contactForm">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <input type="text" class="form-control" name="name" id="name" placeholder="Tên của bạn" />
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <input type="email" class="form-control" name="email" id="email" placeholder="Email của bạn" />
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <input type="tel" class="form-control" name="subject" id="subject" placeholder="Số điện thoại" />
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Tiêu đề" />
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <textarea name="message" class="form-control" id="message" cols="30" rows="7" placeholder="Nội dung"></textarea>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group d-flex justify-content-center">
+                              <input type="submit" value="Gửi" class="btn btn-primary" />
+                              <div class="submitting"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="col-md-5 d-flex align-items-stretch">
+                    <div class="info-wrap bg-primary w-100 p-lg-5 p-4">
+                      <h3 class="mb-4 mt-md-4">Thông tin liên hệ</h3>
+                      <div class="dbox w-100 d-flex align-items-start">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                          <span class="fa fa-map-marker"></span>
+                        </div>
+                        <div class="text pl-3">
+                          <p>
+                            <span>Địa chỉ:</span>
+                            <span> 22 Tạ Quang Bửu-Phường Bách Khoa-Hai Bà Trưng-Hà Nội</span></p>
+                        </div>
+                      </div>
+                      <div class="dbox w-100 d-flex align-items-center">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                          <span class="fa fa-phone"></span>
+                        </div>
+                        <div class="text pl-3">
+                          <p><span>Phone:</span> <a className="text-decoration-none" href="tel://0917448833">0917.44.88.33</a></p>
+                        </div>
+                      </div>
+                      <div class="dbox w-100 d-flex align-items-center">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                          <span class="fa fa-globe"></span>
+                        </div>
+                        <div class="text pl-3">
+                          <p><span>Website</span> <a href="https://bachkhoa.org/">bachkhoa.org</a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label className="mb-0">Email<span className="text-danger">*</span></label>
-                  <input name="email" type="email" className="form-control"
-                   placeholder="Email" value={this.state.email} 
-                   onChange={this.handleChange} onBlur={this.handleBlur} />
-                  {emailError
-                    ? <div className="alert alert-danger mt-2">Vui lòng điền email.</div>
-                    : ''
-                  }
-                  {emailError2
-                    ? <div className="alert alert-danger mt-2">Sai định dạng email.</div>
-                    : ''
-                  }
-                </div>
-                <div className="form-group">
-                  <label className="mb-0">Số điện thoại</label>
-                  <input name="contact" type="text" className="form-control"
-                   placeholder="Số điện thoại..." onChange={this.handleChange} value={this.state.contact} />
-                </div>
-                <div className="form-group">
-                  <label className="mb-0">Nội dung tin<span className="text-danger">*</span></label>
-                  <textarea name="message" type="text"
-                   className="form-control" placeholder="Tin nhắn" 
-                   value={this.state.message} onChange={this.handleChange} onBlur={this.handleBlur} />
-                  {messageError
-                    ? <div className="alert alert-danger mt-2">Vui lòng nhập tin nhắn.</div>
-                    : ''
-                  }
-                </div>
-                <br />
-                <p className="text-center mb-0">
-                  <input type="submit"
-                   className="btn btn-primary btn-lg w-100 text-uppercase"
-                    value="Gửi thông tin" /></p>
-              </form>
+              </div>
             </div>
           </div>
-        </>
-      );
-    } else {
-      return (
-        <div className="thankyou_details">
-          <div className="alert alert-success mt-3">Đã gửi thành công!</div>
         </div>
-      )
-    }
-  }
+      </section>
+    </>
+  )
 }
-
-export default Contact
