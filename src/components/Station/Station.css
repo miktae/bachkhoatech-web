@@ -1,0 +1,146 @@
+.station {
+    height: 100vh;
+    padding: 2%;
+}
+
+.vmc {
+    flex: 1;
+}
+
+.viewmode {
+    flex: 1;
+}
+
+.view {
+    padding: 7% 0% 11% 20%;
+    flex: 1;
+    background: rgba(240, 34, 34, 0.767);
+    color: #fff;
+}
+
+.chart {
+    flex: 2;
+    background: rgb(229, 231, 234);
+}
+
+.mode {
+    flex: 3;
+    padding: 7% 0% 2% 20%;
+    background: rgba(208, 218, 225, 0.919);
+}
+
+.auto,
+.manual {
+    margin-right: 30%;
+}
+
+.toggle {
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.switch-holder {
+    display: flex;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: -8px -8px 15px rgba(255, 255, 255, .7),
+        10px 10px 10px rgba(0, 0, 0, .3),
+        inset 8px 8px 15px rgba(255, 255, 255, .7),
+        inset 10px 10px 10px rgba(0, 0, 0, .3);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switch-label {
+    width: 150px;
+}
+
+.toggle-icon {
+    margin-right: 5px;
+    width: 100px !important;
+}
+
+.switch-toggle {
+    height: 40px;
+}
+
+.switch-toggle input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -2;
+}
+
+.switch-toggle input[type="checkbox"]+label {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    margin: 0;
+    cursor: pointer;
+    box-shadow: inset -8px -8px 15px rgba(255, 255, 255, .6),
+        inset 10px 10px 10px rgba(0, 0, 0, .25);
+
+}
+
+.switch-toggle input[type="checkbox"]+label::before {
+    position: absolute;
+    content: 'OFF';
+    font-size: 13px;
+    text-align: center;
+    line-height: 25px;
+    top: 8px;
+    left: 8px;
+    width: 45px;
+    height: 25px;
+    border-radius: 20px;
+    background-color: #d1dad3;
+    box-shadow: -3px -3px 5px rgba(255, 255, 255, .5),
+        3px 3px 5px rgba(0, 0, 0, .25);
+    transition: .3s ease-in-out;
+}
+
+.switch-toggle input[type="checkbox"]:checked+label::before {
+    left: 50%;
+    content: 'ON';
+    color: #fff;
+    background-color: #00b33c;
+    box-shadow: -3px -3px 5px rgba(255, 255, 255, .5),
+        3px 3px 5px #00b33c;
+}
+
+.fa-fan {
+    animation: rotation 7s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.statistic {
+    background: rgba(147, 160, 208, 0.607);
+    padding: 2%;
+}
+
+.button {
+    background: rgb(79, 133, 203);
+    color: #fff;
+    border: rgb(8, 104, 207);
+    margin: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.button:hover {
+    background: rgb(1, 87, 158);
+}

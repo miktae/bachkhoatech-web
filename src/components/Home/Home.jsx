@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { db } from "../firebase";
 import {
   collection,
@@ -57,7 +58,10 @@ function Home() {
         <tbody>
           {iotData.map((data, index) => (
             <tr key={index}>
-              <td className="text-center">{data.id}</td>
+              <td className="text-center">
+                <Link className="text-dark text-decoration-none link-hover"
+                 to={data.id}>{data.id}</Link>
+              </td>
               <td className="text-center">{data.temp}</td>
               <td className="text-center">{data.hum}</td>
             </tr>

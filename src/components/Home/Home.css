@@ -2,3 +2,7 @@
     width: 80%!important;
     height: 60%!important;
 }
+
+.link-hover:hover{
+  font-weight: bold;
+}

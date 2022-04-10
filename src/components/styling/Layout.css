@@ -1,9 +1,17 @@
+body{
+    background: #fffefe;
+}
+
 .active{
     color: rgb(255, 255, 255);
 }
 
 input.search-field{
     width: 110%;
+}
+
+.nav-item:hover{
+    cursor: pointer;
 }
 
 .nav-text{
